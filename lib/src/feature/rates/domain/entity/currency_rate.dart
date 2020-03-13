@@ -1,4 +1,4 @@
-import 'package:currency_rates/src/domain/currency.dart';
+import 'package:currency_rates/src/feature/rates/domain/entity/currency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 

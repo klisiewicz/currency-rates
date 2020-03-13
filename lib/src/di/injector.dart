@@ -1,5 +1,5 @@
-import 'package:currency_rates/src/data/currency_rate_nbp_repository.dart';
-import 'package:currency_rates/src/domain/currency_rate_repository.dart';
+import 'package:currency_rates/src/feature/rates/data/currency_rate_nbp_repository.dart';
+import 'package:currency_rates/src/feature/rates/domain/repository/currency_rate_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 

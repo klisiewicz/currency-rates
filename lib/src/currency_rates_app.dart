@@ -1,7 +1,7 @@
 import 'package:currency_rates/src/di/injector.dart';
-import 'package:currency_rates/src/domain/currency_rate_bloc.dart';
-import 'package:currency_rates/src/domain/currency_rate_repository.dart';
-import 'package:currency_rates/src/ui/currency_rates_page.dart';
+import 'package:currency_rates/src/feature/rates/domain/bloc/currency_rate_bloc.dart';
+import 'package:currency_rates/src/feature/rates/domain/repository/currency_rate_repository.dart';
+import 'package:currency_rates/src/feature/rates/ui/currency_rates_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -8,25 +8,27 @@ The application displays currency rates from the National Bank of Poland via `RE
 
 #### Events
 
-- `LoadCurrencyRatesEvent` - informs the bloc that it needs to load the currency rates from the repository.
+- `LoadCurrencyRatesEvent` - informs the `BLoC` that it needs to load the currency rates.
+
+For the `sealed class` implementation an additional event was introduced: 
+
+- `RefreshCurrencyRatesEvent` - informs the `BLoC` that it needs to refresh the currency rates.
 
 #### States
 
 In the basic version of the app the UI can be in one of the following states:
 
-- `CurrencyRatesBusy` - while it is fetching currency rates from the repository,
-- `CurrencyRatesReady` - after the currency rates have been loaded,
-- `CurrencyRatesError` - when the currency rates were not loaded.
+- `CurrencyRatesLoading` - when currency rates are being loaded,
+- `CurrencyRatesReady` - after the currency rates have been loaded successfully,
+- `CurrencyRatesError` - when the currency rates haven't been loaded, because of an error.
 
 For the `sealed class` implementation an additional state was introduced: 
 
-- `CurrencyRatesEmpty` - after empty currency rates have been loaded.
-
-It's purpose is to demonstrate how `sealed class` behaves when a new state is added.
+- `CurrencyRatesRefreshing` - when currency rates are being refreshed.
 
 #### Bloc
 
-`CurrencyRatesBloc` in a response to the `LoadCurrencyRatesEvent` event tries to retrieve currency rates from the repository.
+`CurrencyRatesBloc` in a response to the `CurrencyRatesEvent` retrieves currency rates from the repository and displays them on the UI.
 
 ## Implementations
 

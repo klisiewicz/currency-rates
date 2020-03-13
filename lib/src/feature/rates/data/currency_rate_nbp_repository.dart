@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:currency_rates/src/domain/currency.dart';
-import 'package:currency_rates/src/domain/currency_rate.dart';
-import 'package:currency_rates/src/domain/currency_rate_repository.dart';
+import 'package:currency_rates/src/feature/rates/domain/entity/currency.dart';
+import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
+import 'package:currency_rates/src/feature/rates/domain/repository/currency_rate_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 

@@ -1,21 +1,23 @@
-import 'package:currency_rates/src/domain/currency_rate.dart';
+import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
 abstract class CurrencyRateState extends Equatable {
   const CurrencyRateState();
+}
+
+class CurrencyRatesLoading extends CurrencyRateState {
+  const CurrencyRatesLoading();
 
   @override
   List<Object> get props => [];
 }
 
-class CurrencyRatesBusy extends CurrencyRateState {}
-
-class CurrencyRatesReady extends CurrencyRateState {
+class CurrencyRatesLoaded extends CurrencyRateState {
   final List<CurrencyRate> rates;
 
-  const CurrencyRatesReady(this.rates);
+  const CurrencyRatesLoaded(this.rates);
 
   @override
   List<Object> get props => [rates];
