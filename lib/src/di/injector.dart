@@ -11,4 +11,4 @@ void setupDependencies() {
   );
 }
 
-T inject<T>([String name]) => GetIt.instance.get(name);
+T inject<T>([String name]) => GetIt.instance.get(instanceName: name);

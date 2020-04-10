@@ -13,8 +13,9 @@ class CurrencyRatesApp extends StatelessWidget {
       title: 'Currency Rates',
       theme: ThemeData(
         brightness: Brightness.light,
-        canvasColor: Colors.grey[100],
-        primarySwatch: Colors.blueGrey,
+        backgroundColor: Colors.white,
+        canvasColor: Colors.grey[200],
+        primarySwatch: Colors.deepPurple,
       ),
       home: BlocProvider(
         create: (context) =>
