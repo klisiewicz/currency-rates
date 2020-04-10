@@ -1,18 +1,18 @@
 import 'dart:async';
 
+import 'package:currency_rates/src/feature/rates/domain/bloc/currency_rate_bloc.dart';
 import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
 import 'package:currency_rates/src/feature/rates/ui/currency_rates_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CurrencyRatesListRefresh extends StatefulWidget {
   final List<CurrencyRate> rates;
-  final VoidCallback onRefresh;
 
   const CurrencyRatesListRefresh(
     this.rates, {
     Key key,
-    this.onRefresh,
   }) : super(key: key);
 
   @override
@@ -29,13 +29,13 @@ class _CurrencyRatesListRefreshState extends State<CurrencyRatesListRefresh> {
     _refreshCompleter = Completer();
 
     return RefreshIndicator(
-      onRefresh: _refresh,
+      onRefresh: () => _refreshCurrencyRates(context),
       child: CurrencyRatesList(widget.rates),
     );
   }
 
-  Future<void> _refresh() {
-    widget.onRefresh?.call();
+  Future<void> _refreshCurrencyRates(BuildContext context) {
+    BlocProvider.of<CurrencyRatesBloc>(context).refreshCurrencyRates();
     return _refreshCompleter.future;
   }
 

@@ -11,13 +11,10 @@ class CurrencyRatesPage extends StatefulWidget {
 }
 
 class _CurrencyRatesPageState extends State<CurrencyRatesPage> {
-  CurrencyRatesBloc _currencyRatesBloc;
-
   @override
   void initState() {
     super.initState();
-    _currencyRatesBloc = BlocProvider.of<CurrencyRatesBloc>(context)
-      ..loadCurrencyRates();
+    BlocProvider.of<CurrencyRatesBloc>(context).loadCurrencyRates();
   }
 
   @override
@@ -32,15 +29,9 @@ class _CurrencyRatesPageState extends State<CurrencyRatesPage> {
           if (state is CurrencyRatesLoading) {
             return const _LoadingIndicator();
           } else if (state is CurrencyRatesLoaded) {
-            return CurrencyRatesListRefresh(
-              state.rates,
-              onRefresh: _refreshRates,
-            );
+            return CurrencyRatesListRefresh(state.rates);
           } else if (state is CurrencyRatesRefreshing) {
-            return CurrencyRatesListRefresh(
-              state.rates,
-              onRefresh: _refreshRates,
-            );
+            return CurrencyRatesListRefresh(state.rates);
           } else if (state is CurrencyRatesError) {
             return _ErrorMessage(error: state.error);
           } else {
@@ -50,8 +41,6 @@ class _CurrencyRatesPageState extends State<CurrencyRatesPage> {
       ),
     );
   }
-
-  void _refreshRates() => _currencyRatesBloc.refreshCurrencyRates();
 }
 
 class _LoadingIndicator extends StatelessWidget {
