@@ -13,7 +13,7 @@ The application displays currency rates from the National Bank of Poland via `RE
 
 #### States
 
-In the basic version of the app the UI can be in one of the following states:
+The UI can be in one of the following states:
 
 - `CurrencyRatesLoading` - when currency rates are being loaded,
 - `CurrencyRatesLoaded` - after the currency rates have been loaded successfully,
