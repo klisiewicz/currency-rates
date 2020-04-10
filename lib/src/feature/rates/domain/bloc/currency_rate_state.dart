@@ -23,6 +23,15 @@ class CurrencyRatesLoaded extends CurrencyRateState {
   List<Object> get props => [rates];
 }
 
+class CurrencyRatesRefreshing extends CurrencyRateState {
+  final List<CurrencyRate> rates;
+
+  const CurrencyRatesRefreshing(this.rates);
+
+  @override
+  List<Object> get props => [rates];
+}
+
 class CurrencyRatesError extends CurrencyRateState {
   final dynamic error;
 

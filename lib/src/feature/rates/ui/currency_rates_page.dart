@@ -1,6 +1,6 @@
 import 'package:currency_rates/src/feature/rates/domain/bloc/currency_rate_bloc.dart';
 import 'package:currency_rates/src/feature/rates/domain/bloc/currency_rate_state.dart';
-import 'package:currency_rates/src/feature/rates/ui/currency_rates_list.dart';
+import 'package:currency_rates/src/feature/rates/ui/currency_rates_list_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +11,13 @@ class CurrencyRatesPage extends StatefulWidget {
 }
 
 class _CurrencyRatesPageState extends State<CurrencyRatesPage> {
+  CurrencyRatesBloc _currencyRatesBloc;
+
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<CurrencyRatesBloc>(context).loadCurrencyRates();
+    _currencyRatesBloc = BlocProvider.of<CurrencyRatesBloc>(context)
+      ..loadCurrencyRates();
   }
 
   @override
@@ -25,11 +28,19 @@ class _CurrencyRatesPageState extends State<CurrencyRatesPage> {
         elevation: 0,
       ),
       body: BlocBuilder<CurrencyRatesBloc, CurrencyRateState>(
-        builder: (context, state) {
+        builder: (BuildContext context, CurrencyRateState state) {
           if (state is CurrencyRatesLoading) {
             return const _LoadingIndicator();
           } else if (state is CurrencyRatesLoaded) {
-            return CurrencyRatesList(state.rates);
+            return CurrencyRatesListRefresh(
+              state.rates,
+              onRefresh: _refreshRates,
+            );
+          } else if (state is CurrencyRatesRefreshing) {
+            return CurrencyRatesListRefresh(
+              state.rates,
+              onRefresh: _refreshRates,
+            );
           } else if (state is CurrencyRatesError) {
             return _ErrorMessage(error: state.error);
           } else {
@@ -39,6 +50,8 @@ class _CurrencyRatesPageState extends State<CurrencyRatesPage> {
       ),
     );
   }
+
+  void _refreshRates() => _currencyRatesBloc.refreshCurrencyRates();
 }
 
 class _LoadingIndicator extends StatelessWidget {

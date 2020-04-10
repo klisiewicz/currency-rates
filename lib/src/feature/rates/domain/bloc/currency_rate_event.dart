@@ -5,6 +5,10 @@ abstract class CurrencyRateEvent {
   const CurrencyRateEvent();
 }
 
-class LoadCurrencyRatesEvent extends CurrencyRateEvent {
-  const LoadCurrencyRatesEvent();
+class CurrencyRatesLoadEvent extends CurrencyRateEvent {
+  const CurrencyRatesLoadEvent();
+}
+
+class CurrencyRatesRefreshEvent extends CurrencyRateEvent {
+  const CurrencyRatesRefreshEvent();
 }

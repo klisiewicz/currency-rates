@@ -14,18 +14,33 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
   @override
   CurrencyRateState get initialState => const CurrencyRatesLoading();
 
-  void loadCurrencyRates() => add(const LoadCurrencyRatesEvent());
+  void loadCurrencyRates() => add(const CurrencyRatesLoadEvent());
+
+  void refreshCurrencyRates() => add(const CurrencyRatesRefreshEvent());
 
   @override
   Stream<CurrencyRateState> mapEventToState(CurrencyRateEvent event) async* {
-    if (event is LoadCurrencyRatesEvent) {
+    if (event is CurrencyRatesLoadEvent) {
       yield* _loadCurrencyRates();
+    } else if (event is CurrencyRatesRefreshEvent) {
+      yield* _refreshCurrencyRates();
     }
   }
 
   Stream<CurrencyRateState> _loadCurrencyRates() async* {
+    yield const CurrencyRatesLoading();
+    yield* _getCurrencyRates();
+  }
+
+  Stream<CurrencyRateState> _refreshCurrencyRates() async* {
+    if (state is! CurrencyRatesLoaded) return;
+    final rates = (state as CurrencyRatesLoaded).rates;
+    yield CurrencyRatesRefreshing(rates);
+    yield* _getCurrencyRates();
+  }
+
+  Stream<CurrencyRateState> _getCurrencyRates() async* {
     try {
-      yield const CurrencyRatesLoading();
       final List<CurrencyRate> rates = await _repository.getCurrencyRates();
       yield CurrencyRatesLoaded(rates);
     } catch (e) {

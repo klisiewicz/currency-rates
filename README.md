@@ -8,8 +8,8 @@ The application displays currency rates from the National Bank of Poland via `RE
 
 #### Events
 
-- `LoadCurrencyRatesEvent` - informs the `BLoC` that it needs to load the currency rates,
-- `RefreshCurrencyRatesEvent` - informs the `BLoC` that it needs to refresh the currency rates.
+- `CurrencyRatesLoadEvent` - informs the `BLoC` that it needs to load the currency rates,
+- `CurrencyRatesRefreshEvent` - informs the `BLoC` that it needs to refresh the currency rates.
 
 #### States
 
