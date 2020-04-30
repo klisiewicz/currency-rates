@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:currency_rates/src/feature/rates/domain/bloc/currency_rate_event.dart';
-import 'package:currency_rates/src/feature/rates/domain/bloc/currency_rate_state.dart';
 import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
 import 'package:currency_rates/src/feature/rates/domain/repository/currency_rate_repository.dart';
+import 'package:currency_rates/src/feature/rates/view/bloc/currency_rate_event.dart';
+import 'package:currency_rates/src/feature/rates/view/bloc/currency_rate_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {

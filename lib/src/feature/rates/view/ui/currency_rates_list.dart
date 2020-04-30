@@ -1,5 +1,5 @@
 import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
-import 'package:currency_rates/src/feature/rates/ui/currency_rates_list_item.dart';
+import 'package:currency_rates/src/feature/rates/view/ui/currency_rates_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 

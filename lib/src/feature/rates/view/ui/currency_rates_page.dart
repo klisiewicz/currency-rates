@@ -1,6 +1,6 @@
-import 'package:currency_rates/src/feature/rates/domain/bloc/currency_rate_bloc.dart';
-import 'package:currency_rates/src/feature/rates/domain/bloc/currency_rate_state.dart';
-import 'package:currency_rates/src/feature/rates/ui/currency_rates_list.dart';
+import 'package:currency_rates/src/feature/rates//view/ui/currency_rates_list.dart';
+import 'package:currency_rates/src/feature/rates/view/bloc/currency_rate_bloc.dart';
+import 'package:currency_rates/src/feature/rates/view/bloc/currency_rate_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
