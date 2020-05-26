@@ -10,12 +10,12 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
   final CurrencyRateRepository _repository;
   Timer _refreshTimer;
 
-  CurrencyRatesBloc(this._repository)
-      : assert(_repository != null),
-        super(const CurrencyRatesLoaded([]));
+  CurrencyRatesBloc(CurrencyRateRepository repository)
+      : assert(repository != null),
+        _repository = repository;
 
-  List<CurrencyRate> get _loadedRates =>
-      (state as CurrencyRatesLoaded)?.rates ?? [];
+  @override
+  CurrencyRateState get initialState => CurrencyRateState.loading();
 
   void loadCurrencyRates() => add(CurrencyRateEvent.load());
 
@@ -23,18 +23,18 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
   Stream<CurrencyRateState> mapEventToState(CurrencyRateEvent event) async* {
     yield* event.when(
       load: (load) => _loadCurrencyRates(),
-      refresh: (refresh) => _refreshCurrencyRates(),
+      refresh: (refresh) => _refreshCurrencyRatesWhenLoaded(),
     );
   }
 
   Stream<CurrencyRateState> _loadCurrencyRates() async* {
     try {
-      yield const CurrencyRatesLoading();
+      yield CurrencyRateState.loading();
       final List<CurrencyRate> rates = await _repository.getCurrencyRates();
-      yield CurrencyRatesLoaded(rates);
+      yield CurrencyRateState.loaded(rates: rates);
       _startPeriodicRatesRefresh();
     } catch (e) {
-      yield CurrencyRatesError(e);
+      yield CurrencyRateState.failure(error: e);
     }
   }
 
@@ -45,15 +45,25 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
     );
   }
 
-  Stream<CurrencyRateState> _refreshCurrencyRates() async* {
+  Stream<CurrencyRateState> _refreshCurrencyRatesWhenLoaded() async* {
+    yield* state.when(
+      loading: (loading) async* {},
+      loaded: (loaded) => _refreshCurrencyRates(loaded.rates),
+      refreshing: (refreshing) async* {},
+      failure: (failure) async* {},
+    );
+  }
+
+  Stream<CurrencyRateState> _refreshCurrencyRates(
+    List<CurrencyRate> loadedRates,
+  ) async* {
     try {
-      if (state is! CurrencyRatesLoaded) return;
-      yield CurrencyRatesRefreshing(_loadedRates);
+      yield CurrencyRateState.refreshing(rates: loadedRates);
       final List<CurrencyRate> refreshedRates =
           await _repository.getCurrencyRates();
-      yield CurrencyRatesLoaded(refreshedRates);
+      yield CurrencyRateState.loaded(rates: refreshedRates);
     } catch (e) {
-      yield CurrencyRatesLoaded(_loadedRates);
+      yield CurrencyRateState.failure(error: e);
     }
   }
 
