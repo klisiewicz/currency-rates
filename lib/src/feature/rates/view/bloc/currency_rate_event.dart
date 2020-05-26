@@ -1,14 +1,13 @@
 import 'package:flutter/foundation.dart';
+import 'package:sum_types/sum_types.dart';
 
-@immutable
-abstract class CurrencyRateEvent {
-  const CurrencyRateEvent();
-}
+part 'currency_rate_event.g.dart';
 
-class CurrencyRatesLoadEvent extends CurrencyRateEvent {
-  const CurrencyRatesLoadEvent();
-}
+@SumType()
+class CurrencyRateEvent extends _$CurrencyRateEvent {
+  // It is impossible to use "load" for the event's name since Sum Types generates
+  // static method "load" and this generates naming conflicts.
+  const CurrencyRateEvent.fetch() : super(fetch: const Unit());
 
-class CurrencyRatesRefreshEvent extends CurrencyRateEvent {
-  const CurrencyRatesRefreshEvent();
+  const CurrencyRateEvent.refresh() : super(refresh: const Unit());
 }
