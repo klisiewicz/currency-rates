@@ -26,8 +26,8 @@ The UI can be in one of the following states:
 
 ## Implementations
 
-- [Sealed Unions](https://github.com/klisiewicz/currency-rates/tree/sealed-unions/README.md)
-- [Sum Types](https://github.com/klisiewicz/currency-rates/tree/sum-types/README.md)
-- [Sealed Class](https://github.com/klisiewicz/currency-rates/tree/sealed-class/README.md)
-- [Super Enum](https://github.com/klisiewicz/currency-rates/tree/super-enum/README.md)
-- [Freezed](https://github.com/klisiewicz/currency-rates/tree/freezed/README.md)
+- [Sealed Unions](https://github.com/klisiewicz/currency-rates/tree/sealed-unions/)
+- [Sum Types](https://github.com/klisiewicz/currency-rates/tree/sum-types/)
+- [Sealed Class](https://github.com/klisiewicz/currency-rates/tree/sealed-class/)
+- [Super Enum](https://github.com/klisiewicz/currency-rates/tree/super-enum/)
+- [Freezed](https://github.com/klisiewicz/currency-rates/tree/freezed/)
