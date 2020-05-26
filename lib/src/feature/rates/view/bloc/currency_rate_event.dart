@@ -1,14 +1,12 @@
-import 'package:flutter/foundation.dart';
+import 'package:super_enum/super_enum.dart';
 
-@immutable
-abstract class CurrencyRateEvent {
-  const CurrencyRateEvent();
-}
+part "currency_rate_event.g.dart";
 
-class CurrencyRatesLoadEvent extends CurrencyRateEvent {
-  const CurrencyRatesLoadEvent();
-}
-
-class CurrencyRatesRefreshEvent extends CurrencyRateEvent {
-  const CurrencyRatesRefreshEvent();
+@superEnum
+// ignore_for_file: constant_identifier_names
+enum _CurrencyRateEvent {
+  @object
+  Load,
+  @object
+  Refresh,
 }
