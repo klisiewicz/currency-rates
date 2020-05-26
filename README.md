@@ -1,6 +1,8 @@
 # Currency Rates
 
-A sample `Flutter` app illustrating `Sealed Classes` usage. 
+A sample `Flutter` app illustrating `Sealed Classes` usage.
+
+This implementation uses [`Sum Types`](https://pub.dev/packages/sum_types/) package.
 
 The application displays currency rates from the National Bank of Poland via `REST` api. It uses [Bloc](https://github.com/felangel/bloc/) library for the state management.
 
