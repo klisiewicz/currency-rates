@@ -2,6 +2,8 @@
 
 A sample `Flutter` app illustrating `Sealed Classes` usage. 
 
+This implementation uses [`Sealed Unions`](https://pub.dev/packages/sealed_unions/) package.
+
 The application displays currency rates from the National Bank of Poland via `REST` api. It uses [Bloc](https://github.com/felangel/bloc/) library for the state management.
 
 ![Currency Rates](/screenshots/currency-rates.png "Currency Rates")
