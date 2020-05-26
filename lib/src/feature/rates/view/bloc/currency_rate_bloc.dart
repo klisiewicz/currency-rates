@@ -17,9 +17,6 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
   @override
   CurrencyRateState get initialState => const CurrencyRatesLoading();
 
-  List<CurrencyRate> get _loadedRates =>
-      (state as CurrencyRatesLoaded)?.rates ?? [];
-
   void loadCurrencyRates() => add(const CurrencyRatesLoadEvent());
 
   @override
@@ -27,7 +24,7 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
     if (event is CurrencyRatesLoadEvent) {
       yield* _loadCurrencyRates();
     } else if (event is CurrencyRatesRefreshEvent) {
-      yield* _refreshCurrencyRates();
+      yield* _refreshCurrencyRatesWhenLoaded();
     }
   }
 
@@ -49,15 +46,23 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
     );
   }
 
-  Stream<CurrencyRateState> _refreshCurrencyRates() async* {
+  Stream<CurrencyRateState> _refreshCurrencyRatesWhenLoaded() async* {
+    final currentState = state;
+    if (currentState is CurrencyRatesLoaded) {
+      yield* _refreshCurrencyRates(currentState.rates);
+    }
+  }
+
+  Stream<CurrencyRateState> _refreshCurrencyRates(
+    List<CurrencyRate> loadedRates,
+  ) async* {
     try {
-      if (state is! CurrencyRatesLoaded) return;
-      yield CurrencyRatesRefreshing(_loadedRates);
+      yield CurrencyRatesRefreshing(loadedRates);
       final List<CurrencyRate> refreshedRates =
           await _repository.getCurrencyRates();
       yield CurrencyRatesLoaded(refreshedRates);
     } catch (e) {
-      yield CurrencyRatesLoaded(_loadedRates);
+      yield CurrencyRatesLoaded(loadedRates);
     }
   }
 
