@@ -1,4 +1,4 @@
 include: package:lint/analysis_options.yaml
 analyzer:
   exclude:
-    - lib/src/features/rates/view/bloc/*.g.dart
+    - "**/*g.dart"
