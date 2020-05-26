@@ -1,8 +1,17 @@
 import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sealed_class/sealed_class.dart';
+
+part 'currency_rate_state.g.dart';
 
 @immutable
+@Sealed([
+  CurrencyRatesLoading,
+  CurrencyRatesLoaded,
+  CurrencyRatesRefreshing,
+  CurrencyRatesError
+])
 abstract class CurrencyRateState extends Equatable {
   const CurrencyRateState();
 }
