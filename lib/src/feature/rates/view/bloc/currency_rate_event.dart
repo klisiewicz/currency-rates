@@ -1,14 +1,27 @@
 import 'package:flutter/foundation.dart';
+import 'package:sealed_unions/sealed_unions.dart';
 
 @immutable
-abstract class CurrencyRateEvent {
-  const CurrencyRateEvent();
+class CurrencyRateEvent
+    extends Union2Impl<_CurrencyRatesLoadEvent, _CurrencyRatesRefreshEvent> {
+  static const Doublet<_CurrencyRatesLoadEvent, _CurrencyRatesRefreshEvent>
+      _factory = Doublet();
+
+  CurrencyRateEvent._(
+    Union2<_CurrencyRatesLoadEvent, _CurrencyRatesRefreshEvent> union,
+  ) : super(union);
+
+  factory CurrencyRateEvent.load() =>
+      CurrencyRateEvent._(_factory.first(const _CurrencyRatesLoadEvent()));
+
+  factory CurrencyRateEvent.refresh() =>
+      CurrencyRateEvent._(_factory.second(const _CurrencyRatesRefreshEvent()));
 }
 
-class CurrencyRatesLoadEvent extends CurrencyRateEvent {
-  const CurrencyRatesLoadEvent();
+class _CurrencyRatesLoadEvent {
+  const _CurrencyRatesLoadEvent();
 }
 
-class CurrencyRatesRefreshEvent extends CurrencyRateEvent {
-  const CurrencyRatesRefreshEvent();
+class _CurrencyRatesRefreshEvent {
+  const _CurrencyRatesRefreshEvent();
 }
