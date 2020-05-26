@@ -73,7 +73,7 @@ class _ErrorMessage extends StatelessWidget {
             Text('$error'),
             const SizedBox(height: 16),
             IconButton(
-              icon: Icon(Icons.refresh),
+              icon: const Icon(Icons.refresh),
               iconSize: 32,
               onPressed:
                   BlocProvider.of<CurrencyRatesBloc>(context).loadCurrencyRates,
