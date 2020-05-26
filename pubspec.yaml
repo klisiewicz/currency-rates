@@ -12,6 +12,7 @@ dependencies:
   flutter_bloc: ^6.0.6
   get_it: ^5.0.1
   http: ^0.12.2
+  sealed_unions: ^3.0.2+2
 
 dev_dependencies:
   flutter_test:
