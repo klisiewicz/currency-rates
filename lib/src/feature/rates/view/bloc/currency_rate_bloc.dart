@@ -14,52 +14,53 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
       : assert(_repository != null),
         super(const CurrencyRatesLoaded([]));
 
-  void loadCurrencyRates() => add(const CurrencyRatesLoadEvent());
+  void loadCurrencyRates() => add(const CurrencyRateEvent.load());
 
   @override
   Stream<CurrencyRateState> mapEventToState(CurrencyRateEvent event) async* {
-    if (event is CurrencyRatesLoadEvent) {
-      yield* _loadCurrencyRates();
-    } else if (event is CurrencyRatesRefreshEvent) {
-      yield* _refreshCurrencyRatesWhenLoaded();
-    }
+    yield* event.when(
+      load: _loadCurrencyRates,
+      refresh: _refreshCurrencyRatesWhenLoaded,
+    );
   }
 
   Stream<CurrencyRateState> _loadCurrencyRates() async* {
     try {
-      yield const CurrencyRatesLoading();
+      yield const CurrencyRateState.loading();
       final List<CurrencyRate> rates = await _repository.getCurrencyRates();
-      yield CurrencyRatesLoaded(rates);
+      yield CurrencyRateState.loaded(rates);
       _startPeriodicRatesRefresh();
     } catch (e) {
-      yield CurrencyRatesError(e);
+      yield CurrencyRateState.failure(e);
     }
   }
 
   void _startPeriodicRatesRefresh() {
     _refreshTimer ??= Timer.periodic(
       15.seconds,
-      (_) => add(const CurrencyRatesRefreshEvent()),
+      (_) => add(const CurrencyRateEvent.refresh()),
     );
   }
 
   Stream<CurrencyRateState> _refreshCurrencyRatesWhenLoaded() async* {
-    final currentState = state;
-    if (currentState is CurrencyRatesLoaded) {
-      yield* _refreshCurrencyRates(currentState.rates);
-    }
+    yield* state.when(
+      loading: () async* {},
+      loaded: _refreshCurrencyRates,
+      refreshing: (rates) async* {},
+      failure: (error) async* {},
+    );
   }
 
   Stream<CurrencyRateState> _refreshCurrencyRates(
     List<CurrencyRate> loadedRates,
   ) async* {
     try {
-      yield CurrencyRatesRefreshing(loadedRates);
+      yield CurrencyRateState.refreshing(loadedRates);
       final List<CurrencyRate> refreshedRates =
           await _repository.getCurrencyRates();
-      yield CurrencyRatesLoaded(refreshedRates);
+      yield CurrencyRateState.loaded(refreshedRates);
     } catch (e) {
-      yield CurrencyRatesLoaded(loadedRates);
+      yield CurrencyRateState.loaded(loadedRates);
     }
   }
 

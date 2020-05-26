@@ -1,14 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-@immutable
-abstract class CurrencyRateEvent {
-  const CurrencyRateEvent();
-}
+part 'currency_rate_event.freezed.dart';
 
-class CurrencyRatesLoadEvent extends CurrencyRateEvent {
-  const CurrencyRatesLoadEvent();
-}
+@freezed
+abstract class CurrencyRateEvent with _$CurrencyRateEvent {
+  const factory CurrencyRateEvent.load() = Load;
 
-class CurrencyRatesRefreshEvent extends CurrencyRateEvent {
-  const CurrencyRatesRefreshEvent();
+  const factory CurrencyRateEvent.refresh() = Refresh;
 }
