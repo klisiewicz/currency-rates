@@ -10,12 +10,9 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
   final CurrencyRateRepository _repository;
   Timer _refreshTimer;
 
-  CurrencyRatesBloc(CurrencyRateRepository repository)
-      : assert(repository != null),
-        _repository = repository;
-
-  @override
-  CurrencyRateState get initialState => CurrencyRateState.loading();
+  CurrencyRatesBloc(this._repository)
+      : assert(_repository != null),
+        super(CurrencyRateState.loaded(rates: const []));
 
   void loadCurrencyRates() => add(CurrencyRateEvent.load());
 
