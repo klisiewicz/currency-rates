@@ -9,6 +9,7 @@ part of 'currency_rate_state.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$CurrencyRateStateTearOff {
   const _$CurrencyRateStateTearOff();
 
@@ -39,9 +40,11 @@ class _$CurrencyRateStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $CurrencyRateState = _$CurrencyRateStateTearOff();
 
+/// @nodoc
 mixin _$CurrencyRateState {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -75,12 +78,14 @@ mixin _$CurrencyRateState {
   });
 }
 
+/// @nodoc
 abstract class $CurrencyRateStateCopyWith<$Res> {
   factory $CurrencyRateStateCopyWith(
           CurrencyRateState value, $Res Function(CurrencyRateState) then) =
       _$CurrencyRateStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$CurrencyRateStateCopyWithImpl<$Res>
     implements $CurrencyRateStateCopyWith<$Res> {
   _$CurrencyRateStateCopyWithImpl(this._value, this._then);
@@ -90,11 +95,13 @@ class _$CurrencyRateStateCopyWithImpl<$Res>
   final $Res Function(CurrencyRateState) _then;
 }
 
+/// @nodoc
 abstract class $LoadingCopyWith<$Res> {
   factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
       _$LoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$LoadingCopyWithImpl<$Res> extends _$CurrencyRateStateCopyWithImpl<$Res>
     implements $LoadingCopyWith<$Res> {
   _$LoadingCopyWithImpl(Loading _value, $Res Function(Loading) _then)
@@ -104,6 +111,7 @@ class _$LoadingCopyWithImpl<$Res> extends _$CurrencyRateStateCopyWithImpl<$Res>
   Loading get _value => super._value as Loading;
 }
 
+/// @nodoc
 class _$Loading with DiagnosticableTreeMixin implements Loading {
   const _$Loading();
 
@@ -193,12 +201,14 @@ abstract class Loading implements CurrencyRateState {
   const factory Loading() = _$Loading;
 }
 
+/// @nodoc
 abstract class $LoadedCopyWith<$Res> {
   factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
       _$LoadedCopyWithImpl<$Res>;
   $Res call({List<CurrencyRate> rates});
 }
 
+/// @nodoc
 class _$LoadedCopyWithImpl<$Res> extends _$CurrencyRateStateCopyWithImpl<$Res>
     implements $LoadedCopyWith<$Res> {
   _$LoadedCopyWithImpl(Loaded _value, $Res Function(Loaded) _then)
@@ -217,6 +227,7 @@ class _$LoadedCopyWithImpl<$Res> extends _$CurrencyRateStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$Loaded with DiagnosticableTreeMixin implements Loaded {
   const _$Loaded(this.rates) : assert(rates != null);
 
@@ -322,6 +333,7 @@ abstract class Loaded implements CurrencyRateState {
   $LoadedCopyWith<Loaded> get copyWith;
 }
 
+/// @nodoc
 abstract class $RefreshingCopyWith<$Res> {
   factory $RefreshingCopyWith(
           Refreshing value, $Res Function(Refreshing) then) =
@@ -329,6 +341,7 @@ abstract class $RefreshingCopyWith<$Res> {
   $Res call({List<CurrencyRate> rates});
 }
 
+/// @nodoc
 class _$RefreshingCopyWithImpl<$Res>
     extends _$CurrencyRateStateCopyWithImpl<$Res>
     implements $RefreshingCopyWith<$Res> {
@@ -348,6 +361,7 @@ class _$RefreshingCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$Refreshing with DiagnosticableTreeMixin implements Refreshing {
   const _$Refreshing(this.rates) : assert(rates != null);
 
@@ -453,12 +467,14 @@ abstract class Refreshing implements CurrencyRateState {
   $RefreshingCopyWith<Refreshing> get copyWith;
 }
 
+/// @nodoc
 abstract class $FailureCopyWith<$Res> {
   factory $FailureCopyWith(Failure value, $Res Function(Failure) then) =
       _$FailureCopyWithImpl<$Res>;
   $Res call({dynamic error});
 }
 
+/// @nodoc
 class _$FailureCopyWithImpl<$Res> extends _$CurrencyRateStateCopyWithImpl<$Res>
     implements $FailureCopyWith<$Res> {
   _$FailureCopyWithImpl(Failure _value, $Res Function(Failure) _then)
@@ -477,6 +493,7 @@ class _$FailureCopyWithImpl<$Res> extends _$CurrencyRateStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$Failure with DiagnosticableTreeMixin implements Failure {
   const _$Failure(this.error) : assert(error != null);
 

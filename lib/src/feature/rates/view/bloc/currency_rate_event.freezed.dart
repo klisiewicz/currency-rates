@@ -9,6 +9,7 @@ part of 'currency_rate_event.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$CurrencyRateEventTearOff {
   const _$CurrencyRateEventTearOff();
 
@@ -23,9 +24,11 @@ class _$CurrencyRateEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $CurrencyRateEvent = _$CurrencyRateEventTearOff();
 
+/// @nodoc
 mixin _$CurrencyRateEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -51,12 +54,14 @@ mixin _$CurrencyRateEvent {
   });
 }
 
+/// @nodoc
 abstract class $CurrencyRateEventCopyWith<$Res> {
   factory $CurrencyRateEventCopyWith(
           CurrencyRateEvent value, $Res Function(CurrencyRateEvent) then) =
       _$CurrencyRateEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$CurrencyRateEventCopyWithImpl<$Res>
     implements $CurrencyRateEventCopyWith<$Res> {
   _$CurrencyRateEventCopyWithImpl(this._value, this._then);
@@ -66,11 +71,13 @@ class _$CurrencyRateEventCopyWithImpl<$Res>
   final $Res Function(CurrencyRateEvent) _then;
 }
 
+/// @nodoc
 abstract class $LoadCopyWith<$Res> {
   factory $LoadCopyWith(Load value, $Res Function(Load) then) =
       _$LoadCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$LoadCopyWithImpl<$Res> extends _$CurrencyRateEventCopyWithImpl<$Res>
     implements $LoadCopyWith<$Res> {
   _$LoadCopyWithImpl(Load _value, $Res Function(Load) _then)
@@ -80,6 +87,7 @@ class _$LoadCopyWithImpl<$Res> extends _$CurrencyRateEventCopyWithImpl<$Res>
   Load get _value => super._value as Load;
 }
 
+/// @nodoc
 class _$Load with DiagnosticableTreeMixin implements Load {
   const _$Load();
 
@@ -157,11 +165,13 @@ abstract class Load implements CurrencyRateEvent {
   const factory Load() = _$Load;
 }
 
+/// @nodoc
 abstract class $RefreshCopyWith<$Res> {
   factory $RefreshCopyWith(Refresh value, $Res Function(Refresh) then) =
       _$RefreshCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$RefreshCopyWithImpl<$Res> extends _$CurrencyRateEventCopyWithImpl<$Res>
     implements $RefreshCopyWith<$Res> {
   _$RefreshCopyWithImpl(Refresh _value, $Res Function(Refresh) _then)
@@ -171,6 +181,7 @@ class _$RefreshCopyWithImpl<$Res> extends _$CurrencyRateEventCopyWithImpl<$Res>
   Refresh get _value => super._value as Refresh;
 }
 
+/// @nodoc
 class _$Refresh with DiagnosticableTreeMixin implements Refresh {
   const _$Refresh();
 
