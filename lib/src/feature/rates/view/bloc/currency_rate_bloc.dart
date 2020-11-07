@@ -12,7 +12,7 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
 
   CurrencyRatesBloc(this._repository)
       : assert(_repository != null),
-        super(CurrencyRateState.loaded([]));
+        super(CurrencyRateState.loaded(const []));
 
   void loadCurrencyRates() => add(CurrencyRateEvent.load());
 

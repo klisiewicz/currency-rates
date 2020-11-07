@@ -1,5 +1,5 @@
 name: currency_rates
-description: A sample Flutter application illustrating sealed classes usage.
+description: A sample Flutter application illustrating Sealed Unions usage.
 version: 1.0.0+1
 
 environment:
