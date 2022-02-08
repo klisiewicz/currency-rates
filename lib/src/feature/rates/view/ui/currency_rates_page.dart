@@ -1,7 +1,6 @@
 import 'package:currency_rates/src/feature/rates//view/ui/currency_rates_list.dart';
 import 'package:currency_rates/src/feature/rates/view/bloc/currency_rate_bloc.dart';
 import 'package:currency_rates/src/feature/rates/view/bloc/currency_rate_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,7 +43,7 @@ class _CurrencyRatesPageState extends State<CurrencyRatesPage> {
 }
 
 class _LoadingIndicator extends StatelessWidget {
-  const _LoadingIndicator({Key key}) : super(key: key);
+  const _LoadingIndicator({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,16 +52,16 @@ class _LoadingIndicator extends StatelessWidget {
 }
 
 class _ErrorMessage extends StatelessWidget {
-  final dynamic error;
+  final Object error;
 
   const _ErrorMessage({
-    @required this.error,
-    Key key,
-  })  : assert(error != null),
-        super(key: key);
+    required this.error,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final currencyRatesBloc = BlocProvider.of<CurrencyRatesBloc>(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -74,8 +73,7 @@ class _ErrorMessage extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.refresh),
               iconSize: 32,
-              onPressed:
-                  BlocProvider.of<CurrencyRatesBloc>(context).loadCurrencyRates,
+              onPressed: currencyRatesBloc.loadCurrencyRates,
             ),
           ],
         ),

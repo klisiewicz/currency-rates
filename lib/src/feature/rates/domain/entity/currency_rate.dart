@@ -1,20 +1,19 @@
 import 'package:currency_rates/src/feature/rates/domain/entity/currency.dart';
+import 'package:currency_rates/src/feature/rates/domain/entity/price.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
-class CurrencyRate extends Equatable {
+class CurrencyRate with EquatableMixin {
   final Currency currency;
-  final num bid;
-  final num ask;
+  final Price bid;
+  final Price ask;
 
-  const CurrencyRate({
-    @required this.currency,
-    @required this.bid,
-    @required this.ask,
-  })  : assert(currency != null),
-        assert(bid != null && bid > 0),
-        assert(ask != null && ask > 0);
+  CurrencyRate({
+    required this.currency,
+    required this.bid,
+    required this.ask,
+  });
 
   @override
   List<Object> get props => [currency, bid, ask];

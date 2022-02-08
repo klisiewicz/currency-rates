@@ -33,7 +33,7 @@ class CurrencyRatesRefreshing extends CurrencyRateState {
 }
 
 class CurrencyRatesError extends CurrencyRateState {
-  final dynamic error;
+  final Object error;
 
   const CurrencyRatesError(this.error);
 

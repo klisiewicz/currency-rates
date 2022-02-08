@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
+import 'package:currency_rates/src/feature/rates/domain/entity/price.dart';
 import 'package:currency_rates/src/feature/rates/domain/repository/currency_rate_repository.dart';
 
 class CurrencyRateRandomizeRepository extends CurrencyRateRepository {
@@ -16,8 +17,8 @@ class CurrencyRateRandomizeRepository extends CurrencyRateRepository {
         .map(
           (rate) => CurrencyRate(
             currency: rate.currency,
-            bid: rate.bid + _random._offset(),
-            ask: rate.ask + _random._offset(),
+            bid: rate.bid + _random._priceOffset(),
+            ask: rate.ask + _random._priceOffset(),
           ),
         )
         .toList();
@@ -25,5 +26,5 @@ class CurrencyRateRandomizeRepository extends CurrencyRateRepository {
 }
 
 extension on Random {
-  double _offset() => (nextInt(20) - 10) / 10000.0;
+  Price _priceOffset() => Price((nextInt(20) - 10) / 10000.0);
 }

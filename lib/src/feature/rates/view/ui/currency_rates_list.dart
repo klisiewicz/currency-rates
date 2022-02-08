@@ -1,7 +1,6 @@
 import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
 import 'package:currency_rates/src/feature/rates/view/ui/currency_rates_list_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CurrencyRatesList extends StatelessWidget {
   final List<CurrencyRate> rates;
@@ -9,13 +8,13 @@ class CurrencyRatesList extends StatelessWidget {
 
   const CurrencyRatesList(
     this.rates, {
-    Key key,
+    Key? key,
   })  : isRefreshing = false,
         super(key: key);
 
   const CurrencyRatesList.refreshing(
     this.rates, {
-    Key key,
+    Key? key,
   })  : isRefreshing = true,
         super(key: key);
 

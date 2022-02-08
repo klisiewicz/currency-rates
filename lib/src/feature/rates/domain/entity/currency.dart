@@ -1,16 +1,15 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 @immutable
-class Currency extends Equatable {
+class Currency with EquatableMixin {
   final String code;
   final String name;
 
   const Currency({
-    @required this.code,
-    @required this.name,
-  })  : assert(code != null),
-        assert(name != null);
+    required this.code,
+    required this.name,
+  });
 
   @override
   List<Object> get props => [code, name];

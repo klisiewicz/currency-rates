@@ -1,4 +1,5 @@
 import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
+import 'package:currency_rates/src/feature/rates/domain/entity/price.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyRateListItem extends StatelessWidget {
@@ -6,9 +7,8 @@ class CurrencyRateListItem extends StatelessWidget {
 
   const CurrencyRateListItem(
     this.rate, {
-    Key key,
-  })  : assert(rate != null),
-        super(key: key);
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,8 @@ class _CurrencyFlag extends StatelessWidget {
 
   const _CurrencyFlag(
     this.currencyCode, {
-    Key key,
-  })  : assert(currencyCode != null),
-        super(key: key);
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,25 +42,23 @@ class _CurrencyFlag extends StatelessWidget {
 }
 
 class _CurrencyRatePrice extends StatelessWidget {
-  final num bid;
-  final num ask;
+  final Price bid;
+  final Price ask;
 
   const _CurrencyRatePrice({
-    Key key,
-    @required this.bid,
-    @required this.ask,
-  })  : assert(bid != null),
-        assert(ask != null),
-        super(key: key);
+    required this.bid,
+    required this.ask,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text(bid.toStringAsFixed(4)),
+        Text('$bid'),
         const SizedBox(width: 16),
-        Text(ask.toStringAsFixed(4)),
+        Text('$ask'),
       ],
     );
   }

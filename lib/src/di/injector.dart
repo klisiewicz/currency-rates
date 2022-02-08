@@ -18,4 +18,6 @@ void setupDependencies() {
   );
 }
 
-T inject<T>([String name]) => GetIt.instance.get<T>(instanceName: name);
+T inject<T extends Object>([String? name]) {
+  return GetIt.instance.get<T>(instanceName: name);
+}
