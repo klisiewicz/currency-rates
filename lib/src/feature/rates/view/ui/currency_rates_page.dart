@@ -3,6 +3,7 @@ import 'package:currency_rates/src/feature/rates/view/bloc/currency_rate_bloc.da
 import 'package:currency_rates/src/feature/rates/view/bloc/currency_rate_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sealed_flutter_bloc/sealed_flutter_bloc.dart';
 
 class CurrencyRatesPage extends StatefulWidget {
   @override
@@ -23,9 +24,15 @@ class _CurrencyRatesPageState extends State<CurrencyRatesPage> {
         title: const Text('Kursy Walut'),
         elevation: 0,
       ),
-      body: BlocBuilder<CurrencyRatesBloc, CurrencyRateState>(
-        builder: (BuildContext context, CurrencyRateState state) {
-          return state.join(
+      body: SealedBlocBuilder4<
+          CurrencyRatesBloc,
+          CurrencyRateState,
+          CurrencyRatesLoading,
+          CurrencyRatesLoaded,
+          CurrencyRatesRefreshing,
+          CurrencyRatesError>(
+        builder: (context, states) {
+          return states(
             (loading) => const _LoadingIndicator(),
             (loaded) => CurrencyRatesList(loaded.rates),
             (refreshing) => CurrencyRatesList.refreshing(refreshing.rates),

@@ -10,10 +10,13 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
   final CurrencyRateRepository _repository;
   Timer? _refreshTimer;
 
-  CurrencyRatesBloc(this._repository) : super(const CurrencyRatesLoaded([])) {
-    on<CurrencyRatesLoadEvent>((event, emit) => _loadCurrencyRates(emit));
+  CurrencyRatesBloc(this._repository)
+      : super(
+          CurrencyRateState.loaded(const []),
+        ) {
+    on<CurrencyRatesLoadEvent>((event, emit) async => _loadCurrencyRates(emit));
     on<CurrencyRatesRefreshEvent>(
-      (event, emit) => _refreshCurrencyRatesWhenLoaded(emit),
+      (event, emit) async => _refreshCurrencyRatesWhenLoaded(emit),
     );
   }
 
@@ -21,12 +24,12 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
 
   Future<void> _loadCurrencyRates(Emitter<CurrencyRateState> emit) async {
     try {
-      emit(const CurrencyRatesLoading());
+      emit(CurrencyRateState.loading());
       final rates = await _repository.getCurrencyRates();
-      emit(CurrencyRatesLoaded(rates));
+      emit(CurrencyRateState.loaded(rates));
       _startPeriodicRefreshTimer();
     } catch (e) {
-      emit(CurrencyRatesError(e));
+      emit(CurrencyRateState.error(e));
     }
   }
 
@@ -40,9 +43,12 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
   Future<void> _refreshCurrencyRatesWhenLoaded(
     Emitter<CurrencyRateState> emit,
   ) async {
-    if (state is! CurrencyRatesLoaded) return;
-    final loadedRates = (state as CurrencyRatesLoaded).rates;
-    await _refreshCurrencyRates(emit, loadedRates);
+    await state.join(
+      (loading) {},
+      (loaded) async => _refreshCurrencyRates(emit, loaded.rates),
+      (refreshing) {},
+      (error) {},
+    );
   }
 
   Future<void> _refreshCurrencyRates(
@@ -50,11 +56,11 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
     List<CurrencyRate> loadedRates,
   ) async {
     try {
-      emit(CurrencyRatesRefreshing(loadedRates));
+      emit(CurrencyRateState.refreshing(loadedRates));
       final refreshedRates = await _repository.getCurrencyRates();
-      emit(CurrencyRatesLoaded(refreshedRates));
+      emit(CurrencyRateState.loaded(refreshedRates));
     } catch (e) {
-      emit(CurrencyRatesLoaded(loadedRates));
+      emit(CurrencyRateState.loaded(loadedRates));
     }
   }
 
