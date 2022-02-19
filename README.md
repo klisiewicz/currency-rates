@@ -30,5 +30,4 @@ The UI can be in one of the following states:
 - [Sealed BLoC](https://github.com/klisiewicz/currency-rates/tree/sealed-bloc/)
 - [Sum Types](https://github.com/klisiewicz/currency-rates/tree/sum-types/)
 - [Sealed Class](https://github.com/klisiewicz/currency-rates/tree/sealed-class/)
-- [Super Enum](https://github.com/klisiewicz/currency-rates/tree/super-enum/)
 - [Freezed](https://github.com/klisiewicz/currency-rates/tree/freezed/)
