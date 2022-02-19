@@ -1,42 +1,18 @@
 import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sum_types/sum_types.dart';
 
-@immutable
-abstract class CurrencyRateState extends Equatable {
-  const CurrencyRateState();
-}
+part 'currency_rate_state.g.dart';
 
-class CurrencyRatesLoading extends CurrencyRateState {
-  const CurrencyRatesLoading();
+@SumType()
+class CurrencyRateState extends _$CurrencyRateState {
+  const CurrencyRateState.loading() : super(loading: const Unit());
 
-  @override
-  List<Object> get props => [];
-}
+  const CurrencyRateState.loaded(List<CurrencyRate> rates)
+      : super(loaded: rates);
 
-class CurrencyRatesLoaded extends CurrencyRateState {
-  final List<CurrencyRate> rates;
+  const CurrencyRateState.refreshing(List<CurrencyRate> rates)
+      : super(refreshing: rates);
 
-  const CurrencyRatesLoaded(this.rates);
-
-  @override
-  List<Object> get props => [rates];
-}
-
-class CurrencyRatesRefreshing extends CurrencyRateState {
-  final List<CurrencyRate> rates;
-
-  const CurrencyRatesRefreshing(this.rates);
-
-  @override
-  List<Object> get props => [rates];
-}
-
-class CurrencyRatesError extends CurrencyRateState {
-  final Object error;
-
-  const CurrencyRatesError(this.error);
-
-  @override
-  List<Object> get props => [error];
+  const CurrencyRateState.failure(Object error) : super(failure: error);
 }
