@@ -11,9 +11,9 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
   Timer? _refreshTimer;
 
   CurrencyRatesBloc(this._repository) : super(const CurrencyRatesLoaded([])) {
-    on<CurrencyRatesLoadEvent>((event, emit) async => _loadCurrencyRates(emit));
+    on<CurrencyRatesLoadEvent>((event, emit) => _loadCurrencyRates(emit));
     on<CurrencyRatesRefreshEvent>(
-      (event, emit) async => _refreshCurrencyRatesWhenLoaded(emit),
+      (event, emit) => _refreshCurrencyRatesWhenLoaded(emit),
     );
   }
 
