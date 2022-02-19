@@ -11,8 +11,10 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
   Timer? _refreshTimer;
 
   CurrencyRatesBloc(this._repository) : super(const CurrencyRatesLoaded([])) {
-    on<CurrencyRatesLoadEvent>((event, emit) => _loadCurrencyRates(emit));
-    on<CurrencyRatesRefreshEvent>((event, emit) => _refreshCurrencyRates(emit));
+    on<CurrencyRatesLoadEvent>((event, emit) async => _loadCurrencyRates(emit));
+    on<CurrencyRatesRefreshEvent>(
+      (event, emit) async => _refreshCurrencyRatesWhenLoaded(emit),
+    );
   }
 
   void loadCurrencyRates() => add(const CurrencyRatesLoadEvent());
@@ -20,7 +22,7 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
   Future<void> _loadCurrencyRates(Emitter<CurrencyRateState> emit) async {
     try {
       emit(const CurrencyRatesLoading());
-      final List<CurrencyRate> rates = await _repository.getCurrencyRates();
+      final rates = await _repository.getCurrencyRates();
       emit(CurrencyRatesLoaded(rates));
       _startPeriodicRefreshTimer();
     } catch (e) {
@@ -35,9 +37,18 @@ class CurrencyRatesBloc extends Bloc<CurrencyRateEvent, CurrencyRateState> {
     );
   }
 
-  Future<void> _refreshCurrencyRates(Emitter<CurrencyRateState> emit) async {
+  Future<void> _refreshCurrencyRatesWhenLoaded(
+    Emitter<CurrencyRateState> emit,
+  ) async {
     if (state is! CurrencyRatesLoaded) return;
     final loadedRates = (state as CurrencyRatesLoaded).rates;
+    await _refreshCurrencyRates(emit, loadedRates);
+  }
+
+  Future<void> _refreshCurrencyRates(
+    Emitter<CurrencyRateState> emit,
+    List<CurrencyRate> loadedRates,
+  ) async {
     try {
       emit(CurrencyRatesRefreshing(loadedRates));
       final refreshedRates = await _repository.getCurrencyRates();
