@@ -1,6 +1,8 @@
 # Currency Rates
 
-A sample `Flutter` app illustrating `Sealed Classes` usage. 
+A sample `Flutter` app illustrating `Sealed Classes` usage.
+
+This implementation uses [Sealed Annotations](https://pub.dev/packages/sealed_annotations) package.
 
 The application displays currency rates from the National Bank of Poland via `REST` api. It uses [Bloc](https://github.com/felangel/bloc/) library for the state management.
 
@@ -23,11 +25,3 @@ The UI can be in one of the following states:
 #### Bloc
 
 `CurrencyRatesBloc` in a response to the `CurrencyRatesEvent` retrieves currency rates from the `repository` and displays them on the UI.
-
-## Implementations
-
-- [Sealed Unions](https://github.com/klisiewicz/currency-rates/tree/sealed-unions/)
-- [Sealed BLoC](https://github.com/klisiewicz/currency-rates/tree/sealed-bloc/)
-- [Sum Types](https://github.com/klisiewicz/currency-rates/tree/sum-types/)
-- [Sealed Class](https://github.com/klisiewicz/currency-rates/tree/sealed-class/)
-- [Freezed](https://github.com/klisiewicz/currency-rates/tree/freezed/)

@@ -1,42 +1,16 @@
 import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:sealed_annotations/sealed_annotations.dart';
 
-@immutable
-abstract class CurrencyRateState extends Equatable {
-  const CurrencyRateState();
-}
+part 'currency_rate_state.sealed.dart';
 
-class CurrencyRatesLoading extends CurrencyRateState {
-  const CurrencyRatesLoading();
+@Sealed()
+@WithEquality(Equality.data)
+abstract class _CurrencyRateState {
+  void loading();
 
-  @override
-  List<Object> get props => [];
-}
+  void loaded(List<CurrencyRate> rates);
 
-class CurrencyRatesLoaded extends CurrencyRateState {
-  final List<CurrencyRate> rates;
+  void refreshing(List<CurrencyRate> rates);
 
-  const CurrencyRatesLoaded(this.rates);
-
-  @override
-  List<Object> get props => [rates];
-}
-
-class CurrencyRatesRefreshing extends CurrencyRateState {
-  final List<CurrencyRate> rates;
-
-  const CurrencyRatesRefreshing(this.rates);
-
-  @override
-  List<Object> get props => [rates];
-}
-
-class CurrencyRatesError extends CurrencyRateState {
-  final Object error;
-
-  const CurrencyRatesError(this.error);
-
-  @override
-  List<Object> get props => [error];
+  void error(Object error);
 }
