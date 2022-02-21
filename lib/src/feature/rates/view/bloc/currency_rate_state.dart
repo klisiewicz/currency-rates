@@ -1,42 +1,17 @@
 import 'package:currency_rates/src/feature/rates/domain/entity/currency_rate.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-@immutable
-abstract class CurrencyRateState extends Equatable {
-  const CurrencyRateState();
-}
+part 'currency_rate_state.freezed.dart';
 
-class CurrencyRatesLoading extends CurrencyRateState {
-  const CurrencyRatesLoading();
+@freezed
+abstract class CurrencyRateState with _$CurrencyRateState {
+  const factory CurrencyRateState.loading() = Loading;
 
-  @override
-  List<Object> get props => [];
-}
+  const factory CurrencyRateState.loaded(List<CurrencyRate> rates) = Loaded;
 
-class CurrencyRatesLoaded extends CurrencyRateState {
-  final List<CurrencyRate> rates;
+  const factory CurrencyRateState.refreshing(List<CurrencyRate> rates) =
+      Refreshing;
 
-  const CurrencyRatesLoaded(this.rates);
-
-  @override
-  List<Object> get props => [rates];
-}
-
-class CurrencyRatesRefreshing extends CurrencyRateState {
-  final List<CurrencyRate> rates;
-
-  const CurrencyRatesRefreshing(this.rates);
-
-  @override
-  List<Object> get props => [rates];
-}
-
-class CurrencyRatesError extends CurrencyRateState {
-  final Object error;
-
-  const CurrencyRatesError(this.error);
-
-  @override
-  List<Object> get props => [error];
+  const factory CurrencyRateState.failure(Object error) = Failure;
 }

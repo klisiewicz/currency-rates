@@ -25,17 +25,12 @@ class _CurrencyRatesPageState extends State<CurrencyRatesPage> {
       ),
       body: BlocBuilder<CurrencyRatesBloc, CurrencyRateState>(
         builder: (BuildContext context, CurrencyRateState state) {
-          if (state is CurrencyRatesLoading) {
-            return const _LoadingIndicator();
-          } else if (state is CurrencyRatesLoaded) {
-            return CurrencyRatesList(state.rates);
-          } else if (state is CurrencyRatesRefreshing) {
-            return CurrencyRatesList.refreshing(state.rates);
-          } else if (state is CurrencyRatesError) {
-            return _ErrorMessage(error: state.error);
-          } else {
-            throw ArgumentError('Unexpected state $state');
-          }
+          return state.when(
+            loading: () => const _LoadingIndicator(),
+            loaded: (rates) => CurrencyRatesList(rates),
+            refreshing: (rates) => CurrencyRatesList.refreshing(rates),
+            failure: (error) => _ErrorMessage(error: error),
+          );
         },
       ),
     );
